@@ -3,6 +3,22 @@ const router = express.Router();
 const axios = require("axios");
 const { calculateScore } = require("../utils/scoring");
 
+function generateSummary(score) {
+  if (score >= 90) {
+    return "This profile reflects strong engineering maturity, impactful projects, and consistent contribution history. The developer demonstrates production-level readiness and stands out as a highly hireable candidate.";
+  } 
+  if (score >= 70) {
+    return "This developer shows solid technical ability and meaningful project work. With slightly more depth in real-world problem solving or system design, the profile could reach top-tier hiring standards.";
+  } 
+  if (score >= 50) {
+    return "This profile shows growing technical skills and project activity. Focusing on building more complete, original applications and improving consistency will significantly boost hiring potential.";
+  } 
+  if (score >= 30) {
+    return "This GitHub profile reflects early-stage development. More structured projects, clearer documentation, and regular contributions are needed to strengthen professional readiness.";
+  } 
+  return "This profile currently shows minimal project depth or consistency. Building real-world applications and maintaining steady development activity will greatly improve career opportunities.";
+}
+
 router.get("/:username", async (req, res) => {
   try {
     const username = req.params.username;
@@ -32,19 +48,17 @@ router.get("/:username", async (req, res) => {
     const topProjects = rankedRepos.slice(0, 3);
 
     const scoreData = calculateScore(repos, recentCommits);
+    const summary = generateSummary(scoreData.score);
 
     res.json({
       username: userResponse.data.login,
       name: userResponse.data.name,
-      publicRepos: userResponse.data.public_repos,
-      followers: userResponse.data.followers,
-      following: userResponse.data.following,
-      recentCommits: recentCommits,
       score: scoreData.score,
+      summary: summary,
+      recentCommits: recentCommits,
       strengths: scoreData.strengths,
       improvements: scoreData.improvements,
-      topProjects: topProjects,
-      repos: repos
+      topProjects: topProjects
     });
 
   } catch (error) {
