@@ -1,4 +1,4 @@
-function calculateScore(repos) {
+function calculateScore(repos, recentCommits) {
   let score = 0;
   let strengths = [];
   let improvements = [];
@@ -15,44 +15,61 @@ function calculateScore(repos) {
     r.name.toLowerCase().includes("hello")
   );
 
+  // Repo Count
   if (repoCount >= 5) {
-    score += 10;
-    strengths.push("Good number of public repositories");
+    score += 15;
+    strengths.push("Strong number of public repositories");
   } else {
-    improvements.push("Create more quality public projects");
+    improvements.push("Build more public projects to showcase experience");
   }
 
+  // Popularity
   if (totalStars > 50) {
-    score += 10;
-    strengths.push("Projects show community interest (stars)");
+    score += 15;
+    strengths.push("Projects show community interest");
   } else {
-    improvements.push("Try building projects others would find useful");
+    improvements.push("Create projects that solve real-world problems");
   }
 
+  // Tech Diversity
   if (languages.size >= 3) {
-    score += 10;
+    score += 15;
     strengths.push("Good variety of technologies used");
   } else {
-    improvements.push("Explore more programming languages or tech stacks");
+    improvements.push("Explore more tools, frameworks, or languages");
   }
 
+  // Documentation
   if (reposWithReadme >= repoCount / 2) {
-    score += 10;
-    strengths.push("Many projects include documentation");
+    score += 15;
+    strengths.push("Projects include helpful documentation");
   } else {
-    improvements.push("Add README files to explain your projects");
+    improvements.push("Add README files explaining your projects");
   }
 
+  // Project Quality
   if (weakProjects.length < repoCount / 2) {
-    score += 10;
-    strengths.push("Several projects appear meaningful and well-defined");
+    score += 15;
+    strengths.push("Projects appear meaningful and well-defined");
   } else {
-    improvements.push("Avoid tutorial/demo projects and build real-world applications");
+    improvements.push("Avoid tutorial/demo repos; build original applications");
   }
 
-  score = Math.min(score, 50);
+  // Activity
+  if (recentCommits > 5) {
+    score += 15;
+    strengths.push("Shows consistent recent coding activity");
+  } else {
+    improvements.push("Increase commit activity to show consistency");
+  }
 
-  return { score, strengths, improvements };
+  // Bonus for high impact
+  if (totalStars > 500) {
+    score += 10;
+    strengths.push("Some projects have significant impact");
+  }
+
+  return { score: Math.min(score, 100), strengths, improvements };
 }
 
 module.exports = { calculateScore };
