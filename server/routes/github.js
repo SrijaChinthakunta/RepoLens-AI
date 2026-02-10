@@ -29,6 +29,10 @@ router.get("/:username", async (req, res) => {
       createdAt: repo.created_at
     }));
 
+    const now = Date.now();
+    const sixMonthsMs = 1000 * 60 * 60 * 24 * 30 * 6;
+    const activeRepos = repos.filter(r => now - new Date(r.pushedAt).getTime() < sixMonthsMs);
+
     const rankedRepos = [...repos].sort((a, b) => b.stars - a.stars);
     const topProjects = rankedRepos.slice(0, 3);
 
@@ -41,7 +45,9 @@ router.get("/:username", async (req, res) => {
       avatar: userResponse.data.avatar_url,
       bio: userResponse.data.bio,
       followers: userResponse.data.followers,
+      activeRepos: activeRepos.length,
       score: scoreData.score,
+      breakdown: scoreData.breakdown,
       summary,
       strengths: scoreData.strengths,
       improvements: scoreData.improvements,
