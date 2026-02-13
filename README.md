@@ -125,6 +125,18 @@ npm start
 
 ---
 
+## 🎥 Demo Video
+
+Watch a short walkthrough of RepoLens AI:
+
+<video src="./Sample.mp4" controls width="100%"></video>
+
+If the video does not preview directly on GitHub, you can open it here:  
+[▶ Watch Demo Video](./Sample.mp4)
+
+
+---
+
 ## 👩‍💻 Author
 
 **Srija Chinthakunta**
