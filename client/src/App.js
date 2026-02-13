@@ -16,7 +16,10 @@ function App() {
     setError("");
 
     try {
-      const res = await axios.get(`https://repolens-ai-r10q.onrender.com/api/github/${username}`)
+      const res = await axios.get(
+  `https://repolens-ai-r10q.onrender.com/api/github/${encodeURIComponent(username)}`
+);
+
 
       setData(res.data);
     } catch {
