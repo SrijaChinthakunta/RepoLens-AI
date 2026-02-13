@@ -120,7 +120,7 @@ function App() {
         <div style={styles.searchBox}>
           <input
             type="text"
-            placeholder="Enter GitHub username"
+            placeholder="Enter GitHub profile URL"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             style={styles.input}
