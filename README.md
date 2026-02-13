@@ -9,7 +9,7 @@ RepoLens AI is an AI-powered web app that evaluates GitHub profiles the way hiri
 
 ## 🚀 Live Demo
 
-🔗 **Try it out!** https://repo-lens-4wzx872q1-srijas-projects-5a1c4aee.vercel.app  
+🔗 **Try it out!** https://repolensai.vercel.app/  
 🔗 **Backend API:** https://repolens-ai-r10q.onrender.com 
 
 ---
